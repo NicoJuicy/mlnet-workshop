@@ -7,8 +7,8 @@
 
     internal class Program
     {
-        private static string TRAIN_DATA_FILEPATH = @"C:\Users\NicoJuicy\AppData\Local\Temp\mlnet-workshop\data\true_car_listings.csv";
-        private static string MODEL_FILEPATH = @"C:\Users\NicoJuicy\AppData\Local\Temp\mlnet-workshop\models\true_car_listings-model.zip";
+        //private static string TRAIN_DATA_FILEPATH = @"C:\Users\NicoJuicy\AppData\Local\Temp\mlnet-workshop\data\true_car_listings.csv";
+        //private static string MODEL_FILEPATH = @"C:\Users\NicoJuicy\AppData\Local\Temp\mlnet-workshop\models\true_car_listings-model.zip";
 
         internal static void Main(string[] args)
         {
@@ -17,6 +17,8 @@
 
             // Load training data
             Console.WriteLine("Loading data...");
+            var TRAIN_DATA_FILEPATH = System.IO.Path.GetFullPath(@"..\..\..\..\..\data\true_car_listings.csv");
+            var MODEL_FILEPATH = System.IO.Path.GetFullPath(@"..\..\..\..\..\models\true_car_listings-model.zip");
             IDataView trainingData = mlContext.Data.LoadFromTextFile<modelInput>(path: TRAIN_DATA_FILEPATH, hasHeader: true, separatorChar: ',');
 
             // Split the data into a train and test set

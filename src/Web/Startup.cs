@@ -36,8 +36,9 @@ namespace Web
             services.AddTransient<ICarModelService,CarFileModelService>((opt) => {
                 var filePath = Path.Join(_env.WebRootPath, "data", "carmakerdetails.json");
                 return new CarFileModelService(filePath);});
-
-            services.AddPredictionEnginePool<modelInput, ModelOutput>().FromFile(modelName: "PricePrediction", filePath: @"C:\Users\NicoJuicy\AppData\Local\Temp\mlnet-workshop\models\true_car_listings-model.zip");
+            //var MODEL_FILEPATH = System.IO.Path.GetFullPath(@"..\..\..\..\..\models\true_car_listings-model.zip");
+            var prevModelpath = @"C:\Users\NicoJuicy\AppData\Local\Temp\mlnet-workshop\models\true_car_listings-model.zip";
+            services.AddPredictionEnginePool<modelInput, ModelOutput>().FromFile(modelName: "PricePrediction", filePath: prevModelpath);
 
         }
 
