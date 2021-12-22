@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.ML;
+using Shared;
+using Web.Models;
 using Web.Services;
 
 namespace Web
@@ -33,6 +36,9 @@ namespace Web
             services.AddTransient<ICarModelService,CarFileModelService>((opt) => {
                 var filePath = Path.Join(_env.WebRootPath, "data", "carmakerdetails.json");
                 return new CarFileModelService(filePath);});
+
+            services.AddPredictionEnginePool<modelInput, ModelOutput>().FromFile(modelName: "PricePrediction", filePath: @"C:\Users\NicoJuicy\AppData\Local\Temp\mlnet-workshop\models\true_car_listings-model.zip");
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -17,11 +17,16 @@ using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Microsoft.Extensions.Logging;
 using Web.Models;
 using Web.Services;
+using Microsoft.Extensions.ML;
+using Shared;
 
 namespace Web.Pages
 {
     public class IndexModel : PageModel
     {
+        private readonly PredictionEnginePool<global::Shared.modelInput, ModelOutput> _pricePredictionEnginePool;
+
+
         private readonly IWebHostEnvironment _env;
         private readonly ILogger<IndexModel> _logger;
 
@@ -42,12 +47,14 @@ namespace Web.Pages
         public SelectList CarYearSL { get; } = new SelectList(Enumerable.Range(1930, (DateTime.Today.Year - 1929)).Reverse());
         public SelectList CarMakeSL { get; }
 
-        public IndexModel(IWebHostEnvironment env, ILogger<IndexModel> logger, ICarModelService carFileModelService)
+        public IndexModel(IWebHostEnvironment env, ILogger<IndexModel> logger, ICarModelService carFileModelService, PredictionEnginePool<global::Shared.modelInput, ModelOutput> pricePredictionEnginePool)
         {
             _env = env;
             _logger = logger;
             _carModelService = carFileModelService.GetDetails();
             CarMakeSL = new SelectList(_carModelService, "Id", "Model", default, "Make");
+
+            _pricePredictionEnginePool = pricePredictionEnginePool;
         }
 
         public void OnGet()
@@ -67,6 +74,20 @@ namespace Web.Pages
 
             CarInfo.Make = selectedMakeModel.Make;
             CarInfo.Model = selectedMakeModel.Model;
+
+            //prepare input
+            global::Shared.modelInput input = new global::Shared.modelInput
+            {
+                Year = (float)CarInfo.Year,
+                Mileage = (float)CarInfo.Mileage,
+                Make = CarInfo.Make,
+                Model = CarInfo.Model
+            };
+            //predict
+
+            ModelOutput prediction = _pricePredictionEnginePool.Predict(modelName: "PricePrediction", example: input);
+            //set
+            CarInfo.Price = prediction.Score;
 
             _logger.LogInformation($"{CarInfo.Make}  | {CarInfo.Model}");
             _logger.LogInformation($"Predicted price for car {CarInfo.Year} from {CarInfo.Mileage} miles");
