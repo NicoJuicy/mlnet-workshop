@@ -13,15 +13,15 @@ namespace DataTests
     {
         private static string TRAIN_DATA_FILEPATH = @"C:\Users\NicoJuicy\AppData\Local\Temp\mlnet-workshop\data\true_car_listings.csv";
 
-        private static IEnumerable<global::Shared.modelInput> Rows;
+        private static IEnumerable<global::Shared.ModelInput> Rows;
 
         [ClassInitialize]
         public static void Initialize(TestContext testContext)
         {
             var mlContext = new MLContext();
-            var data = mlContext.Data.LoadFromTextFile<global::Shared.modelInput>(TRAIN_DATA_FILEPATH, hasHeader: true, separatorChar: ',');
+            var data = mlContext.Data.LoadFromTextFile<global::Shared.ModelInput>(TRAIN_DATA_FILEPATH, hasHeader: true, separatorChar: ',');
 
-            Rows = mlContext.Data.CreateEnumerable<global::Shared.modelInput>(data, false);
+            Rows = mlContext.Data.CreateEnumerable<global::Shared.ModelInput>(data, false);
         }
 
 

@@ -24,7 +24,7 @@
             var MODEL_FILEPATH = System.IO.Path.GetFullPath(@"..\..\..\..\..\models\true_car_listings-model.zip");
            // TRAIN_DATA_FILEPATH = parentDir.GetFiles("true_car_listings-model.zip", System.IO.SearchOption.AllDirectories).FirstOrDefault().FullName;
 
-            IDataView trainingData = mlContext.Data.LoadFromTextFile<modelInput>(path: TRAIN_DATA_FILEPATH, hasHeader: true, separatorChar: ',');
+            IDataView trainingData = mlContext.Data.LoadFromTextFile<ModelInput>(path: TRAIN_DATA_FILEPATH, hasHeader: true, separatorChar: ',');
 
             // Split the data into a train and test set
             var trainTestSplit = mlContext.Data.TrainTestSplit(trainingData, testFraction: 0.2);

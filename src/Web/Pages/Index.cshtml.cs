@@ -24,7 +24,7 @@ namespace Web.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly PredictionEnginePool<global::Shared.modelInput, ModelOutput> _pricePredictionEnginePool;
+        private readonly PredictionEnginePool<global::Shared.ModelInput, ModelOutput> _pricePredictionEnginePool;
 
 
         private readonly IWebHostEnvironment _env;
@@ -47,7 +47,7 @@ namespace Web.Pages
         public SelectList CarYearSL { get; } = new SelectList(Enumerable.Range(1930, (DateTime.Today.Year - 1929)).Reverse());
         public SelectList CarMakeSL { get; }
 
-        public IndexModel(IWebHostEnvironment env, ILogger<IndexModel> logger, ICarModelService carFileModelService, PredictionEnginePool<global::Shared.modelInput, ModelOutput> pricePredictionEnginePool)
+        public IndexModel(IWebHostEnvironment env, ILogger<IndexModel> logger, ICarModelService carFileModelService, PredictionEnginePool<global::Shared.ModelInput, ModelOutput> pricePredictionEnginePool)
         {
             _env = env;
             _logger = logger;
@@ -76,7 +76,7 @@ namespace Web.Pages
             CarInfo.Model = selectedMakeModel.Model;
 
             //prepare input
-            global::Shared.modelInput input = new global::Shared.modelInput
+            global::Shared.ModelInput input = new global::Shared.ModelInput
             {
                 Year = (float)CarInfo.Year,
                 Mileage = (float)CarInfo.Mileage,

@@ -38,7 +38,7 @@ namespace Web
                 return new CarFileModelService(filePath);});
             //var MODEL_FILEPATH = System.IO.Path.GetFullPath(@"..\..\..\..\..\models\true_car_listings-model.zip");
             var prevModelpath = @"C:\Users\NicoJuicy\AppData\Local\Temp\mlnet-workshop\models\true_car_listings-model.zip";
-            services.AddPredictionEnginePool<modelInput, ModelOutput>().FromFile(modelName: "PricePrediction", filePath: prevModelpath);
+            services.AddPredictionEnginePool<ModelInput, ModelOutput>().FromFile(modelName: "PricePrediction", filePath: prevModelpath);
 
         }
 

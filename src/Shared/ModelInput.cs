@@ -5,7 +5,7 @@ using Microsoft.ML.Data;
 
 namespace Shared
 {
-    public class modelInput
+    public class ModelInput
     {
         [ColumnName("Label"), LoadColumn(0)]
         public float Price { get; set; }
