@@ -92,6 +92,7 @@ namespace Web.Pages
             _logger.LogInformation($"{CarInfo.Make}  | {CarInfo.Model}");
             _logger.LogInformation($"Predicted price for car {CarInfo.Year} from {CarInfo.Mileage} miles");
             ShowPrice = true;
+
         }
 
         private async Task ProcessUploadedImageAsync(IFormFile uploadedImage)
