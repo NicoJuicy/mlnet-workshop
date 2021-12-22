@@ -18,7 +18,12 @@
             // Load training data
             Console.WriteLine("Loading data...");
             var TRAIN_DATA_FILEPATH = System.IO.Path.GetFullPath(@"..\..\..\..\..\data\true_car_listings.csv");
+          //  var parentDir = new System.IO.DirectoryInfo(System.IO.Path.GetFullPath("~/")).Parent.Parent.Parent.Parent.Parent.Parent;
+         //   TRAIN_DATA_FILEPATH = parentDir.GetFiles("true_car_listings.csv", System.IO.SearchOption.AllDirectories).FirstOrDefault().FullName;
+
             var MODEL_FILEPATH = System.IO.Path.GetFullPath(@"..\..\..\..\..\models\true_car_listings-model.zip");
+           // TRAIN_DATA_FILEPATH = parentDir.GetFiles("true_car_listings-model.zip", System.IO.SearchOption.AllDirectories).FirstOrDefault().FullName;
+
             IDataView trainingData = mlContext.Data.LoadFromTextFile<modelInput>(path: TRAIN_DATA_FILEPATH, hasHeader: true, separatorChar: ',');
 
             // Split the data into a train and test set
